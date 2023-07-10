@@ -22,6 +22,7 @@
 #### LogIn from 'Let's plan...' page
 ![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/2c7e4724-c5af-41a9-a4e5-2db81651d705)
 
+### Add a new trip for logged User
 ![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/667f2ad9-0d44-4e0d-bf3c-0d13648d609f)
 
 
