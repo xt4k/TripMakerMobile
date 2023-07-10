@@ -1,0 +1,168 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
+    }
+    dependencies {
+        classpath("io.qameta.allure.gradle.allure:allure-plugin:2.11.2")
+    }
+}
+
+
+plugins {
+    id 'java-library'
+    id 'io.qameta.allure' version '2.10.0'//'2.11.2'
+    id 'java-test-fixtures'
+}
+
+group = 'com.yuriy.appium.example.mobile'
+version = '1.0-SNAPSHOT'
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 17
+targetCompatibility = 17
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    allureVersion = "2.23.0"
+    appiumVersion = "8.5.1"
+    aspectjVersion = "1.9.19"
+    assertjVersion = "3.24.2"
+
+    fakerVersion = "1.0.2"
+    jacksonVersion = "2.15.2"
+
+    lombokVersion = "1.18.20"
+    logbackVersion = "1.4.8"
+    selenideVersion = "6.15.0"
+    ownerVersion = "1.0.12"
+
+    slf4jVersion = "2.0.7"
+    testngVersion = "7.8.0"
+}
+
+allure {
+    //allureJavaVersion= allureVersion
+    //aspectjWeaver = aspectjVersion
+    autoconfigure = true
+    aspectjweaver = true
+    version = allureVersion
+
+    report {
+        version = allureVersion
+    }
+
+    useTestNG {
+        version = allureVersion
+    }
+
+}
+
+dependencies {
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    implementation("ch.qos.logback:logback-core:${logbackVersion}",
+            "io.qameta.allure:allure-rest-assured:${allureVersion}",
+            "io.qameta.allure:allure-java-commons:${allureVersion}",
+            "io.qameta.allure:allure-selenide:${allureVersion}",
+            "io.qameta.allure:allure-testng:${allureVersion}")
+
+    testImplementation(
+            "org.slf4j:slf4j-api:${slf4jVersion}",
+            "ch.qos.logback:logback-classic:${logbackVersion}",
+
+
+            "commons-io:commons-io:2.11.0",
+
+            "org.assertj:assertj-core:${assertjVersion}",
+
+
+            "org.aspectj:aspectjweaver:${aspectjVersion}",
+            "com.codeborne:selenide:${selenideVersion}",
+
+
+            "io.appium:java-client:${appiumVersion}",
+            "org.aeonbits.owner:owner:${ownerVersion}",
+
+            "org.projectlombok:lombok:${lombokVersion}",
+            "com.github.javafaker:javafaker:${fakerVersion}",
+
+            "org.testng:testng:${testngVersion}")
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+configurations {
+    testCompile
+}
+
+
+task copyAllureConfigFiles(type: Copy) {
+    description 'Adding Environment, Categories, and Allure Properties files'
+
+    String allureProperties = "${projectDir}/src/main/resources/allure.properties"
+    String allureCategories = "${projectDir}/src/main/resources/categories.json"
+    String allureResults = "${project.buildDir}/allure-results/"
+
+    from allureProperties, allureCategories
+    into allureResults
+}
+
+task addAllureEnvironment {
+    doLast {
+        String environment = System.getProperty("environment")
+        File folders = file("${project.buildDir}/allure-results")
+        if (!folders.exists()) folders.mkdirs()
+
+        File allurePropertiesFile = file("${project.buildDir}/allure-results/environment.properties")
+        Properties environmentProperties = new Properties()
+        if (environment) environmentProperties.setProperty("environment", environment)
+        environmentProperties.store(allurePropertiesFile.newWriter(), 'Allure environment.properties file generated')
+    }
+}
+
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    systemProperties['user.dir'] = project.projectDir
+    minHeapSize '128m'
+    maxHeapSize '4096m'
+
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+
+    useTestNG()
+    finalizedBy(copyAllureConfigFiles, addAllureEnvironment)
+}
+
+/*
+task runSearchTests(type: Test) {
+    useTestNG()
+    include "com/aerlingus/automation/esb/regression/purchase/**"
+}*/
+
+task runSuite(type: Test) {
+    useTestNG()
+    include "tripmaker/tests/android/**"
+
+}
+
+task runSuitePositive(type: Test) {
+    include "tripmaker/tests/android/**"
+
+}
