@@ -35,3 +35,7 @@
 ### In purpose negative test: 'Verify contact email on Support page'
 ![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/9d4837a1-bff5-4872-b8f8-3a63dbc2cac0)
 
+
+
+https://github.com/xt4k/TripMakerMobile/assets/38681283/27839268-3298-4d47-b463-cc69599d6e56
+
