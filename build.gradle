@@ -13,7 +13,7 @@ buildscript {
 
 plugins {
     id 'java-library'
-    id 'io.qameta.allure' version '2.10.0'//'2.11.2'
+    id 'io.qameta.allure' version '2.11.2'
     id 'java-test-fixtures'
 }
 
@@ -46,8 +46,6 @@ ext {
 }
 
 allure {
-    //allureJavaVersion= allureVersion
-    //aspectjWeaver = aspectjVersion
     autoconfigure = true
     aspectjweaver = true
     version = allureVersion
@@ -149,12 +147,6 @@ tasks.withType(Test) {
     useTestNG()
     finalizedBy(copyAllureConfigFiles, addAllureEnvironment)
 }
-
-/*
-task runSearchTests(type: Test) {
-    useTestNG()
-    include "com/aerlingus/automation/esb/regression/purchase/**"
-}*/
 
 task runSuite(type: Test) {
     useTestNG()

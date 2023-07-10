@@ -16,7 +16,7 @@ import static tripmaker.enums.Constants.CONTENT_DESC;
 public class MyTripsSteps {
    private MyTripsPage myTripsPage = new MyTripsPage();
 
-    @Step("Verify 'Active Trip' details:")
+    @Step("Verify that 'Active Trip' should have destination:'{expected.value}'")
     public void verifyActiveTripDetails(MostPopularCities expected) {
         List<String> actualContentDescList = myTripsPage.getAttributes(ANDROID_VIEW_CLASS,CONTENT_DESC);
         assertThat(actualContentDescList)
