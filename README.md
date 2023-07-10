@@ -12,26 +12,26 @@
 
 ## Allure report
 ![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/54cfef61-0b09-4dfc-bb33-f2d823abf75e)
+![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/aa234807-9280-47fc-b5e5-eb0268fe7de7)
 
 
 ## :arrow_forward: screenshots
-### In purpose negative test (unsuccessfull search drug by name)
-![2023-07-04_18-01-57](https://github.com/xt4k/HelsiLocalMobileTesting/assets/38681283/63773537-ef75-43c2-9ab5-9b8b0b82a5a0)
-
 ### Positive tests
-#### LogIn from 'Let's plan...' page
+#### 'Log In from "Let's plan..." page'
 ![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/2c7e4724-c5af-41a9-a4e5-2db81651d705)
 
-### Add a new trip for logged User
+#### 'Add a new trip for logged User'
 ![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/667f2ad9-0d44-4e0d-bf3c-0d13648d609f)
+![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/1116488f-f1fc-478e-9842-7a6df75edb80)
+
+#### 'Plan a new trip for not logged User'
+![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/a3e8e342-6b8e-4786-b34e-f1aa1871237a)
+
+#### 'Support details tests'
+##### 'Verify contact email on Support page'
+![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/641096a3-ed6b-4bcd-8ceb-f98b5ac3065b)
 
 
-#### Search by drug name
-![image](https://github.com/xt4k/HelsiLocalMobileTesting/assets/38681283/2bf7a144-6480-4793-aaab-d782936a433e)
-![image](https://github.com/xt4k/HelsiLocalMobileTesting/assets/38681283/d309b840-314a-4482-8130-7f990446fc8d)
+### In purpose negative test: 'Verify contact email on Support page'
+![image](https://github.com/xt4k/TripMakerMobile/assets/38681283/9d4837a1-bff5-4872-b8f8-3a63dbc2cac0)
 
-##### Run history for test:
-![image](https://github.com/xt4k/HelsiLocalMobileTesting/assets/38681283/4524537e-b9fc-440f-baba-c0d2ccb23524)
-
-## Autotests screenrecord
-https://github.com/xt4k/HelsiLocalMobileTesting/assets/38681283/94b966e7-fe76-4a3b-99fc-30bb4edc3469
