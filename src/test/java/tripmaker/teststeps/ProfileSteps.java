@@ -1,15 +1,13 @@
 package tripmaker.teststeps;
 
 import io.qameta.allure.Step;
-import tripmaker.enums.MostPopularCities;
 import tripmaker.model.UserProfile;
-import tripmaker.pages.android.MyTripsPage;
 import tripmaker.pages.android.tabs.more.ProfilePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Steps that can done for My Trips page.
+ * Steps that can done for 'Profile' page.
  */
 public class ProfileSteps {
     private ProfilePage profilePage = new ProfilePage();
@@ -22,6 +20,5 @@ public class ProfileSteps {
                 .as("Profile is logged with properly user: %s", actualUserProfile)
                 .usingRecursiveComparison()
                 .isEqualTo(expected);
-
     }
 }

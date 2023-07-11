@@ -19,14 +19,12 @@ public class MyTripsPage extends BasePage {
 
     @Step("Begin 'add A new Trip' workflow")
     public NewTripDestination addNewTrip() {
-        ifPresentCloseAdvice(SKIP);
-        $(xpath(locatorMyTrips.addNewTrip())).click();
+        tapXpath(locatorMyTrips.addNewTrip());
         return new NewTripDestination();
     }
 
     @Step("Take texts from '{attributeName}' for classes {className}.")
     public List<String> getAttributes(Constants className, Constants attributeName) {
-        ifPresentCloseAdvice(SKIP);
 
         ElementsCollection collection2 = $$(className(className.value)).filter(Condition.attribute(attributeName.value));
         List<String> contentDescList = collection2.attributes("content-desc");

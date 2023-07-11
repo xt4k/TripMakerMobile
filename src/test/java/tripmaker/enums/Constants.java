@@ -2,6 +2,12 @@ package tripmaker.enums;
 
 public enum Constants {
 
+    DEVICE("device"),
+    PIE("pie"),
+    LOLLIPOP("lollipop"),
+
+    SAUCELABS("saucelabs"),
+
     TRIPMAKER("Tripmaker"),
     NO_SPECIFIC_DATE("No specific dates"),
 

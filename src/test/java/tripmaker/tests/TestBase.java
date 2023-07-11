@@ -28,7 +28,9 @@ import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static io.appium.java_client.AppiumBy.accessibilityId;
 import static io.qameta.allure.Allure.step;
 import static java.lang.String.valueOf;
+import static java.lang.System.getProperty;
 import static tripmaker.config.Configs.gmail;
+import static tripmaker.enums.Constants.*;
 import static tripmaker.enums.LetsPlanItems.LOGIN;
 import static tripmaker.enums.MoreTabItems.LOG_OUT;
 import static tripmaker.enums.Tabs.MORE;
@@ -36,7 +38,7 @@ import static tripmaker.pages.BasePage.shortDelay;
 
 public class TestBase {
     private static final Logger log = LoggerFactory.getLogger(TestBase.class);
-    private static String deviceProvider = System.getProperty("deviceProvider", "mobile");
+    private static String deviceProvider = System.getProperty(DEVICE.value, PIE.value);
     public LetsPlanPage letsPlanPage = new LetsPlanPage();
     public MyPlacesPage defaultTab = new MyPlacesPage();
 
@@ -45,8 +47,8 @@ public class TestBase {
 
     @BeforeSuite
     public void setup() {
-        log.info("deviceProvider: " + deviceProvider);
-        Configuration.browser = DriverSettings.getDeviceProvider(deviceProvider);
+        log.info("device: " + DEVICE.value);
+        Configuration.browser = DriverSettings.getDeviceProvider();
         Configuration.browserSize = null;
     }
 
@@ -67,7 +69,7 @@ public class TestBase {
         String base64output = ((AndroidDriver) getWebDriver()).stopRecordingScreen();
         step("Close driver", Selenide::closeWebDriver);
 
-        if (deviceProvider.contains("saucelabs")) {
+        if (getProperty(DEVICE.value).contains(SAUCELABS.value)) {
             Attach.video(sessionId);
         }
         //   saveVideoLocally(sessionId, base64output);
@@ -108,13 +110,15 @@ public class TestBase {
     }
 
     @Step("Wait until trip generated ({duration})")
-    protected MyPlacesPage setupTrip(int duration) {
+    protected MyPlacesPage longDelay(int duration) {
 
         for (int i = 0; i < duration; i++) {
-            shortDelay();
+            shortDelay(1);
             log.info("wait for '" + i + "' second");
-            if (isShown(MORE))
+            if (isShown(MORE)) {
+                mainMenuWidget.getShot("completed trip generation");
                 break;
+            }
         }
         return new MyPlacesPage();
     }

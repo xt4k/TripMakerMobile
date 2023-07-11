@@ -54,11 +54,11 @@ public class Attach {
 
 
     public static void saveVideoLocally(String sessionId, String base64output) {
-        if (!(Configs.mobileDriver.getMobileVideoStorage().isEmpty())) {
+        if (!(Configs.mobileDriverPie.getMobileVideoStorage().isEmpty())) {
             String dateStr = new SimpleDateFormat("ddMMyyyy_hh-mm-ss").format(new Date());
             try {
                 byte[] data = Base64.getDecoder().decode(base64output);
-                String destinationPath = format("%s/ScreenRecord_%s.mp4", Configs.mobileDriver.getMobileVideoStorage(), dateStr);
+                String destinationPath = format("%s/ScreenRecord_%s.mp4", Configs.mobileDriverPie.getMobileVideoStorage(), dateStr);
                 Path path = Paths.get(destinationPath);
                 Files.write(path, data); //addAttachment("Video", "video/mp4", destinationPath, "mp4");
             } catch (IOException ex) {

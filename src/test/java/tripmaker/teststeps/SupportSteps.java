@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static tripmaker.enums.Constants.*;
 
 /**
- * Steps that can done for My Trips page.
+ * Steps that can done for 'Support' page.
  */
 public class SupportSteps {
     private SupportPage supportPage = new SupportPage();

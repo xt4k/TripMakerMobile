@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import tripmaker.annotations.JiraIssue;
 import tripmaker.annotations.Layer;
 import tripmaker.enums.MoreTabItems;
-import tripmaker.enums.MostPopularCities;
+import tripmaker.enums.plan.MostPopularCities;
 import tripmaker.enums.Tabs;
 import tripmaker.pages.android.MyTripsPage;
 import tripmaker.tests.TestBase;
@@ -56,7 +56,7 @@ public class TripLogged extends TestBase {
                 .setDefaultDinnerBudget()
                 .createTrip();
 
-                setupTrip(30);
+                longDelay(30);
 
         proceedToMyTrips()
                 .verifyActiveTripDetails(destinationCity);

@@ -1,4 +1,4 @@
-package tripmaker.enums;
+package tripmaker.enums.plan;
 
 public enum MostPopularCities {
     NEW_YORK("New York, NY"),

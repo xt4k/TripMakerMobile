@@ -1,14 +1,13 @@
 package tripmaker.teststeps;
 
 import io.qameta.allure.Step;
-import tripmaker.enums.MostPopularCities;
+import tripmaker.enums.plan.MostPopularCities;
 import tripmaker.pages.android.LetsPlanPage;
-import tripmaker.pages.android.MyTripsPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Steps that can done for My Trips page.
+ * Steps that can done for 'Let's plan ... trip' page.
  */
 public class LetsPlanSteps {
     private LetsPlanPage letsPlanPage = new LetsPlanPage();

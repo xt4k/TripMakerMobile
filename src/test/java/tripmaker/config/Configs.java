@@ -8,10 +8,12 @@ import tripmaker.config.locator.ProfileConfig;
 
 public class Configs {
     public static SauceLabsDriverConfig sauceLabs = ConfigFactory.create(SauceLabsDriverConfig.class, System.getProperties());
-    public static LocalDriverConfig mobileDriver = ConfigFactory.create(LocalDriverConfig.class, System.getProperties());
+    public static LocalDriverConfigPie mobileDriverPie = ConfigFactory.create(LocalDriverConfigPie.class, System.getProperties());
+
+    public static LocalDriverConfigLollipop mobileDriverLollipop = ConfigFactory.create(LocalDriverConfigLollipop.class, System.getProperties());
     public static GmailConfig gmail = ConfigFactory.create(GmailConfig.class, System.getProperties());
 
-    public static MyPlacesConfig locator = ConfigFactory.create(MyPlacesConfig.class, System.getProperties());
+    public static MyPlacesConfig locatorMyPlaces = ConfigFactory.create(MyPlacesConfig.class, System.getProperties());
 
     public static GmailLoginConfig locatorLogIn = ConfigFactory.create(GmailLoginConfig.class, System.getProperties());
 

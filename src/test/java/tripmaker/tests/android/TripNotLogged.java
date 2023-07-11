@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import tripmaker.annotations.JiraIssue;
 import tripmaker.annotations.Layer;
 import tripmaker.enums.Constants;
-import tripmaker.enums.MostPopularCities;
+import tripmaker.enums.plan.MostPopularCities;
 import tripmaker.tests.TestBase;
 
 import static com.codeborne.selenide.Selenide.back;
@@ -55,14 +55,14 @@ public class TripNotLogged extends TestBase {
                 .tap(Constants.NO_SPECIFIC_DATE)
                 .tap(CREATE_ITINERARY);
 
-        setupTrip(30);
+        longDelay(30);
 
         proceedToMyTrips()
                 .verifyActiveTripDetails(destinationCity);
     }
 
     @AfterMethod()
-    public void logOutOfApp() {
+    public void closeApp() {
         back();
         back();
     }

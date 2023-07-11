@@ -2,7 +2,7 @@ package tripmaker.config.locator;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("classpath:page-locator/gmail.properties")
+@Config.Sources("classpath:page-locator/${device}/gmail.properties")
 public interface GmailLoginConfig extends Config {
 
     @Key("email.xpath")

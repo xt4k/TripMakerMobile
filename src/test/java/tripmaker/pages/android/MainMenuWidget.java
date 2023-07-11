@@ -15,10 +15,8 @@ public class MainMenuWidget extends BasePage {
 
     @Step("Switch to tab '{tab.value}'.")
     public BasePage switchToTab(Tabs tab) {
-        ifPresentCloseAdvice(SKIP);
-
-        $(accessibilityId(tab.value)).click();
-
+       // ifPresentCloseAdvice(SKIP);
+        tap(tab.value);
         return switch (tab) {
             case MORE -> new MorePage();
             case MY_PLACES -> new MyPlacesPage();

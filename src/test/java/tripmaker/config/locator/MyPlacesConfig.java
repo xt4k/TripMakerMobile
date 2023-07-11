@@ -2,7 +2,7 @@ package tripmaker.config.locator;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("classpath:page-locator/login.properties")
+@Config.Sources("classpath:page-locator/${device}/login.properties")
 public interface MyPlacesConfig extends Config {
 
     @Key("settings")

@@ -21,7 +21,7 @@ public class LocalDriverIos implements WebDriverProvider {
 
     public static URL getAppiumServerUrl() {
         try {
-            return new URL(Configs.mobileDriver.serverUrl());
+            return new URL(Configs.mobileDriverPie.serverUrl());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -34,14 +34,14 @@ public class LocalDriverIos implements WebDriverProvider {
         UiAutomator2Options options = new UiAutomator2Options();
         options.merge(capabilities);
         options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2); //todo Deprecated
-        options.setPlatformName(Configs.mobileDriver.platformName());
-        options.setDeviceName(Configs.mobileDriver.deviceName());
-        options.setPlatformVersion(Configs.mobileDriver.platformVersion());
+        options.setPlatformName(Configs.mobileDriverPie.platformName());
+        options.setDeviceName(Configs.mobileDriverPie.deviceName());
+        options.setPlatformVersion(Configs.mobileDriverPie.platformVersion());
         options.setApp(app.getAbsolutePath());
-        options.setLocale(Configs.mobileDriver.locale());
-        options.setLanguage(Configs.mobileDriver.language());
-        options.setAppPackage(Configs.mobileDriver.appPackage());
-        options.setAppActivity(Configs.mobileDriver.appActivity());
+        options.setLocale(Configs.mobileDriverPie.locale());
+        options.setLanguage(Configs.mobileDriverPie.language());
+        options.setAppPackage(Configs.mobileDriverPie.appPackage());
+        options.setAppActivity(Configs.mobileDriverPie.appActivity());
         options.setCapability("autoAcceptAlerts", "true"); //to accept all alerts for iOS apps
         options.setCapability("autoDismissAlerts", "true"); //to dismiss all alerts for iOS apps
 
@@ -50,15 +50,15 @@ public class LocalDriverIos implements WebDriverProvider {
     }
 
     private File getApp() {
-        String appPath = Configs.mobileDriver.appPath();
-        String appUrl = Configs.mobileDriver.appUrl();
+        String appPath = Configs.mobileDriverPie.appPath();
+        String appUrl = Configs.mobileDriverPie.appUrl();
 
         File app = new File(appPath);
         if (!app.exists()) {
             try (InputStream in = new URL(appUrl).openStream()) {
                 copyInputStreamToFile(in, app);
             } catch (IOException e) {
-                throw new AssertionError("Failed to download apk", e);
+                throw new AssertionError("Failed to download ipa", e);
             }
         }
         return app;

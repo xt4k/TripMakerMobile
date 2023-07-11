@@ -38,8 +38,8 @@ public class LogIn extends TestBase {
         letsPlanPage
                 .login()
                 .signInWithGoogle()
-                .signWithExist()
-                .ifPresentCloseAdvice(SKIP);
+                .signWithExist();
+                //.ifPresentCloseAdvice(SKIP);
 
         proceedToProfile()
                 .verifyProfileDetails(getDefaultUserProfile());
