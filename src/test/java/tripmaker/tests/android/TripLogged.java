@@ -3,6 +3,7 @@ package tripmaker.tests.android;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.qameta.allure.testng.Tag;
 import io.qameta.allure.testng.Tags;
@@ -12,9 +13,9 @@ import org.testng.annotations.Test;
 import tripmaker.annotations.JiraIssue;
 import tripmaker.annotations.Layer;
 import tripmaker.enums.MoreTabItems;
-import tripmaker.enums.plan.MostPopularCities;
 import tripmaker.enums.Tabs;
-import tripmaker.pages.android.MyTripsPage;
+import tripmaker.enums.plan.MostPopularCities;
+import tripmaker.pages.android.tabs.more.MyTripsPage;
 import tripmaker.tests.TestBase;
 
 import static com.codeborne.selenide.Selenide.back;
@@ -29,13 +30,14 @@ import static tripmaker.enums.AdviceItems.SKIP;
 @JiraIssue("AUTO-005")
 public class TripLogged extends TestBase {
 
+    @Step("Login. Later should be replaced login by API")
     @BeforeMethod()
     public void loginIfNot() {
         if (notLogged()) {
             letsPlanPage
                     .login()
                     .signInWithGoogle()
-                    // .signWithExist()
+                    .signWithExistIfShown()
                     .ifPresentCloseAdvice(SKIP);
         }
     }
@@ -56,7 +58,7 @@ public class TripLogged extends TestBase {
                 .setDefaultDinnerBudget()
                 .createTrip();
 
-                longDelay(30);
+        tripBuilding(30);
 
         proceedToMyTrips()
                 .verifyActiveTripDetails(destinationCity);

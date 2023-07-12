@@ -1,4 +1,4 @@
-package tripmaker.pages.android;
+package tripmaker.pages.android.tabs.myplaces;
 
 
 import tripmaker.pages.BasePage;

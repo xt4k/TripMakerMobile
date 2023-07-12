@@ -3,6 +3,7 @@ package tripmaker.tests.android;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.qameta.allure.testng.Tag;
 import io.qameta.allure.testng.Tags;
@@ -42,7 +43,7 @@ public class TripNotLogged extends TestBase {
     @Test(description = "Add a new trip for not Logged User",priority = 2)
     void planTripNotLoggedInUser() {
         MostPopularCities destinationCity = MostPopularCities.TORONTO;
-        step("Begin 'Plan a trip' workflow for 'NOT_LOGGED_IN' user");
+        step("Begin 'Plan a trip' workflow for 'NOT_LOGGED_IN' user to " + destinationCity.value);
 
         letsPlanPage
                 .tap(PLAN_A_TRIP.value)
@@ -55,12 +56,13 @@ public class TripNotLogged extends TestBase {
                 .tap(Constants.NO_SPECIFIC_DATE)
                 .tap(CREATE_ITINERARY);
 
-        longDelay(30);
+        tripBuilding(30);
 
         proceedToMyTrips()
                 .verifyActiveTripDetails(destinationCity);
     }
 
+    @Step("Close app.")
     @AfterMethod()
     public void closeApp() {
         back();

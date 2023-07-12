@@ -2,7 +2,7 @@ package tripmaker.teststeps;
 
 import io.qameta.allure.Step;
 import tripmaker.enums.plan.MostPopularCities;
-import tripmaker.pages.android.MyTripsPage;
+import tripmaker.pages.android.tabs.more.MyTripsPage;
 
 import java.util.List;
 

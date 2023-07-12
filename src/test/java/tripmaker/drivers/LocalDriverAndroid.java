@@ -15,13 +15,13 @@ import java.net.URL;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 
 
-public class LocalDriverAndroidPie implements WebDriverProvider {
+public class LocalDriverAndroid implements WebDriverProvider {
 
-    protected static final Logger log = LoggerFactory.getLogger(LocalDriverAndroidPie.class);
+    protected static final Logger log = LoggerFactory.getLogger(LocalDriverAndroid.class);
 
     public static URL getAppiumServerUrl() {
         try {
-            return new URL(Configs.mobileDriverPie.serverUrl());
+            return new URL(Configs.mobileDriverAndroid.serverUrl());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -33,21 +33,19 @@ public class LocalDriverAndroidPie implements WebDriverProvider {
         options.merge(capabilities);
 
         options.setAutomationName(ANDROID_UIAUTOMATOR2)
-                .setPlatformName(Configs.mobileDriverPie.platformName())
-                .setDeviceName(Configs.mobileDriverPie.deviceName())
-                .setAppPackage(Configs.mobileDriverPie.appPackage())
-                .setAppActivity(Configs.mobileDriverPie.appActivity())
-                .setPlatformVersion(Configs.mobileDriverPie.platformVersion())
-                .setLocale(Configs.mobileDriverPie.locale())
-                .setLanguage(Configs.mobileDriverPie.language())
-                .setCapability("appium:newCommandTimeout", Configs.mobileDriverPie.timeout());
+                .setPlatformName(Configs.mobileDriverAndroid.platformName())
+                .setDeviceName(Configs.mobileDriverAndroid.deviceName())
+                .setAppPackage(Configs.mobileDriverAndroid.appPackage())
+                .setAppActivity(Configs.mobileDriverAndroid.appActivity())
+                .setPlatformVersion(Configs.mobileDriverAndroid.platformVersion())
+                .setLocale(Configs.mobileDriverAndroid.locale())
+                .setLanguage(Configs.mobileDriverAndroid.language())
+                .setCapability("appium:newCommandTimeout", Configs.mobileDriverAndroid.timeout());
 
-        options.setCapability("appium:noReset",  Configs.mobileDriverPie.noReset());//true
-
+        options.setCapability("appium:noReset", Configs.mobileDriverAndroid.noReset());//true
 
         log.info("android driver options: "+options);
         log.info("getAppiumServerUrl: "+getAppiumServerUrl());
-
 
         return new AndroidDriver(getAppiumServerUrl(), options);
     }

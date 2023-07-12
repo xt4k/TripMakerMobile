@@ -2,8 +2,8 @@ package tripmaker.config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("classpath:config/drivers/lollipop.properties")
-public interface LocalDriverConfigLollipop extends Config {
+@Config.Sources("classpath:config/drivers/${device}.properties")
+public interface LocalDriverAndroidConfig extends Config {
 
     @Key("platform.name")
     String platformName();

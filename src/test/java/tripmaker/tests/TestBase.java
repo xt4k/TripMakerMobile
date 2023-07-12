@@ -30,7 +30,8 @@ import static io.qameta.allure.Allure.step;
 import static java.lang.String.valueOf;
 import static java.lang.System.getProperty;
 import static tripmaker.config.Configs.gmail;
-import static tripmaker.enums.Constants.*;
+import static tripmaker.enums.Constants.DEVICE;
+import static tripmaker.enums.Constants.SAUCELABS;
 import static tripmaker.enums.LetsPlanItems.LOGIN;
 import static tripmaker.enums.MoreTabItems.LOG_OUT;
 import static tripmaker.enums.Tabs.MORE;
@@ -38,17 +39,18 @@ import static tripmaker.pages.BasePage.shortDelay;
 
 public class TestBase {
     private static final Logger log = LoggerFactory.getLogger(TestBase.class);
-    private static String deviceProvider = System.getProperty(DEVICE.value, PIE.value);
+    public MyPlacesPage myPlacesPage = new MyPlacesPage();
     public LetsPlanPage letsPlanPage = new LetsPlanPage();
-    public MyPlacesPage defaultTab = new MyPlacesPage();
+
 
     public MainMenuWidget mainMenuWidget = new MainMenuWidget();
 
 
     @BeforeSuite
     public void setup() {
-        log.info("device: " + DEVICE.value);
+        log.info("device: " + System.getProperty(DEVICE.value));
         Configuration.browser = DriverSettings.getDeviceProvider();
+        Configuration.timeout = 10_000;
         Configuration.browserSize = null;
     }
 
@@ -85,9 +87,9 @@ public class TestBase {
 
     @Step("Proceed to 'Profile' page")
     protected ProfileSteps proceedToProfile() {
-        mainMenuWidget
-                .switchToTab(MORE)
-                .tapItem(MoreTabItems.PROFILE);
+        mainMenuWidget.switchToTab(MORE);
+        sleep(5000);
+        mainMenuWidget.tapItem(MoreTabItems.PROFILE);
         return new ProfileSteps();
     }
 
@@ -110,7 +112,7 @@ public class TestBase {
     }
 
     @Step("Wait until trip generated ({duration})")
-    protected MyPlacesPage longDelay(int duration) {
+    protected MyPlacesPage tripBuilding(int duration) {
 
         for (int i = 0; i < duration; i++) {
             shortDelay(1);

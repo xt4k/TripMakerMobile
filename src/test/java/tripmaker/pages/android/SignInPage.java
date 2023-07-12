@@ -10,7 +10,7 @@ public class SignInPage extends BasePage {
     @Step("Login with Google")
     public ChooseAccountPage signInWithGoogle() {
         tapXpath(locatorLogIn.signInGoogle());
-        getShot("signInWithGoogle-2");
+       // getShot("signInWithGoogle-2");
         return new ChooseAccountPage();
     }
 }

@@ -3,6 +3,7 @@ package tripmaker.tests.android;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.qameta.allure.testng.Tag;
 import io.qameta.allure.testng.Tags;
@@ -15,8 +16,6 @@ import tripmaker.enums.Tabs;
 import tripmaker.pages.android.LetsPlanPage;
 import tripmaker.tests.TestBase;
 
-import static tripmaker.enums.AdviceItems.SKIP;
-
 
 @Tag("android")
 
@@ -28,19 +27,19 @@ import static tripmaker.enums.AdviceItems.SKIP;
 @JiraIssue("AUTO-002")
 public class LogOut extends TestBase {
 
+
+    @Step("Login. Later should be replaced login by API")
     @BeforeMethod()
     public void logInIfNot() {
         if (notLogged()) {
             letsPlanPage
                     .login()
                     .signInWithGoogle()
-                   // .signWithExist()
-                    .ifPresentCloseAdvice(SKIP);
+                    .signWithExistIfShown();
         }
     }
 
     @Test(description = "Logout from app",priority = 1)
-    @Owner("TripMaker_automation_suite_demo")
     void logoutOfApp() {
         letsPlanPage = (LetsPlanPage) mainMenuWidget
                 .switchToTab(Tabs.MORE)

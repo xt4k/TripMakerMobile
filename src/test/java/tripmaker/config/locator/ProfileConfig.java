@@ -2,7 +2,7 @@ package tripmaker.config.locator;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("classpath:page-locator/${device}/tabs/profile.properties")
+@Config.Sources("classpath:page-locator/tabs/profile.properties")
 public interface ProfileConfig extends Config {
 
     @Key("first.name.xpath")

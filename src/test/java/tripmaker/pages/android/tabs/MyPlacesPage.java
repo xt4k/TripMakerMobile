@@ -3,7 +3,7 @@ package tripmaker.pages.android.tabs;
 
 import io.qameta.allure.Step;
 import tripmaker.pages.BasePage;
-import tripmaker.pages.android.PreferencesPage;
+import tripmaker.pages.android.tabs.myplaces.PreferencesPage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.By.xpath;

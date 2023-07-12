@@ -1,10 +1,7 @@
 package tripmaker.tests.android;
 
 
-import io.qameta.allure.Feature;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import io.qameta.allure.testng.Tag;
 import io.qameta.allure.testng.Tags;
 import org.testng.annotations.AfterMethod;
@@ -17,7 +14,8 @@ import tripmaker.tests.TestBase;
 
 import static com.codeborne.selenide.Selenide.back;
 import static tripmaker.enums.AdviceItems.SKIP;
-import static tripmaker.enums.Constants.*;
+import static tripmaker.enums.Constants.GET_SUPPORT;
+import static tripmaker.enums.Constants.SUPPORT_AT_TRIPMAKER_GURU;
 
 
 @Feature("Mobile tests - Testset for 'live' mobile on Android platform tests.")
@@ -25,16 +23,17 @@ import static tripmaker.enums.Constants.*;
 @Tags({@Tag("mobile"), @Tag("live")})
 @Owner("xt4k for TripMaker_automation_suite_demo")
 @Layer("Mobile")
-@JiraIssues({@JiraIssue("AUTO-003"),@JiraIssue("AUTO-004")})
+@JiraIssues({@JiraIssue("AUTO-003"), @JiraIssue("AUTO-004")})
 public class SupportDetailTests extends TestBase {
 
+    @Step("Log out. Later should be replaced logout by API")
     @BeforeMethod()
     public void logInIfNot() {
         if (notLogged()) {
             letsPlanPage
                     .login()
                     .signInWithGoogle()
-                    // .signWithExist()
+                    .signWithExistIfShown()
                     .ifPresentCloseAdvice(SKIP);
         }
     }
@@ -48,7 +47,7 @@ public class SupportDetailTests extends TestBase {
                 .verifySupportPageTitle(GET_SUPPORT.value);
     }
 
-    @Test(description = "Verify contact email on Support page (NEGATIVE TEST)",priority = 5)
+    @Test(description = "Verify contact email on Support page (NEGATIVE TEST)", priority = 5)
     @Issue("1111")
     @JiraIssue("AUTO-004")
     void failedVerifySupportPageEmail() {
@@ -57,10 +56,11 @@ public class SupportDetailTests extends TestBase {
                 .verifySupportPageTitle(SUPPORT_AT_TRIPMAKER_GURU.value);
     }
 
+    @Step("Log out. Later should be replaced logout by API")
     @AfterMethod(alwaysRun = true)
-    public void afterEach() {
+    public void logOutAfterEach() {
         back();
-       logOut();
+        logOut();
     }
 
 }

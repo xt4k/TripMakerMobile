@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import tripmaker.config.Configs;
 
 import java.net.MalformedURLException;
@@ -68,5 +69,4 @@ public class SauceLabsDriver implements WebDriverProvider {
             throw new RuntimeException(e);
         }
     }
-
 }

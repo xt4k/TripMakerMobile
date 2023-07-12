@@ -15,7 +15,6 @@ public class MainMenuWidget extends BasePage {
 
     @Step("Switch to tab '{tab.value}'.")
     public BasePage switchToTab(Tabs tab) {
-       // ifPresentCloseAdvice(SKIP);
         tap(tab.value);
         return switch (tab) {
             case MORE -> new MorePage();

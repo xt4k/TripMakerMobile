@@ -6,6 +6,8 @@ public enum Constants {
     PIE("pie"),
     LOLLIPOP("lollipop"),
 
+    TIRAMISU("tiramisu"),
+
     SAUCELABS("saucelabs"),
 
     TRIPMAKER("Tripmaker"),

@@ -1,4 +1,4 @@
-package tripmaker.pages.android;
+package tripmaker.pages.android.trip;
 
 import io.qameta.allure.Step;
 import tripmaker.enums.Constants;

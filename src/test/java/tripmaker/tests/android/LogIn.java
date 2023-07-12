@@ -3,6 +3,7 @@ package tripmaker.tests.android;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.qameta.allure.testng.Tag;
 import io.qameta.allure.testng.Tags;
@@ -14,7 +15,6 @@ import tripmaker.annotations.Layer;
 import tripmaker.tests.TestBase;
 
 import static com.codeborne.selenide.Selenide.back;
-import static tripmaker.enums.AdviceItems.SKIP;
 
 
 @Tag("android")
@@ -27,6 +27,7 @@ import static tripmaker.enums.AdviceItems.SKIP;
 @JiraIssue("AUTO-001")
 public class LogIn extends TestBase {
 
+    @Step("Log out. Later should be replaced logout by API")
     @BeforeMethod()
     public void logOutIfLogin() {
         if (!notLogged())
@@ -38,13 +39,14 @@ public class LogIn extends TestBase {
         letsPlanPage
                 .login()
                 .signInWithGoogle()
-                .signWithExist();
-                //.ifPresentCloseAdvice(SKIP);
+                .signWithExistIfShown();
+
 
         proceedToProfile()
                 .verifyProfileDetails(getDefaultUserProfile());
     }
 
+    @Step("Log out. Later should be replaced logout by API")
     @AfterMethod()
     public void logOutAfterLoginTest() {
         back();

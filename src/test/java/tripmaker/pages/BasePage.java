@@ -1,5 +1,6 @@
 package tripmaker.pages;
 
+import com.codeborne.selenide.SelenideElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
 import org.slf4j.Logger;
@@ -9,10 +10,12 @@ import tripmaker.enums.Constants;
 import tripmaker.enums.MoreTabItems;
 import tripmaker.helpers.Attach;
 import tripmaker.pages.android.LetsPlanPage;
-import tripmaker.pages.android.MyTripsPage;
+import tripmaker.pages.android.tabs.more.MyTripsPage;
 import tripmaker.pages.android.SignInPage;
+import tripmaker.pages.android.tabs.more.SupportPage;
 import tripmaker.pages.android.tabs.more.ProfilePage;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -38,10 +41,10 @@ public class BasePage {
 
     @Step("Tap to 'MORE' tab item:'{tabItem.value}'")
     public BasePage tapItem(MoreTabItems tabItem) {
-        getShot("tapItem"+tabItem.value+1);
-         ifPresentCloseAdvice(SKIP);
+        // getShot("tapItem " + tabItem.value + 1);
+        ifPresentCloseAdvice(SKIP);
         tap(tabItem.value);
-        getShot("tapItem " + tabItem.value + 2);
+        //  getShot("tapItem " + tabItem.value + 2);
         return switch (tabItem) {
             case PROFILE -> new ProfilePage();
             case MY_TRIPS -> new MyTripsPage();
@@ -54,9 +57,9 @@ public class BasePage {
 
     @Step("Tap to '{id}' element")
     public BasePage tap(String id) {
-       // ifPresentCloseAdvice(SKIP);
+        sleep(1000);
         $(accessibilityId(id)).click();
-        shortDelay(1);
+        sleep(1000);
         return this;
     }
 
@@ -68,8 +71,13 @@ public class BasePage {
 
     @Step("Tap to element by xpath")
     public BasePage tapXpath(String locator) {
-        ifPresentCloseAdvice(SKIP);
-        $(xpath(locator)).click();
+        sleep(1000);
+        $(xpath(locator))
+                .shouldBe(visible)
+                .shouldBe(exist)
+                .shouldBe(enabled)
+                .click();
+        getShot("tap by Xpath: " + locator);
         return this;
     }
 
@@ -84,22 +92,29 @@ public class BasePage {
                 .isEqualTo($(accessibilityId(LOGIN.value)).exists());
     }
 
-    public BasePage ifPresentCloseAdvice(AdviceItems adviceItem) {
-        shortDelay(1);
-        if ($(accessibilityId(adviceItem.value)).exists()) {
-            getShot("Closing advice popup");
-            $(accessibilityId(adviceItem.value)).click();
-            shortDelay(1);
-            getShot("Closed advice popup");
-        } else {
-            getShot(format("WRONG SEARCH FOR ELEMENT '%s'.", adviceItem.value));
-            step(format("WRONG SEARCH FOR ELEMENT '%s'.", adviceItem.value));
+    public BasePage tapElementIfPresent(SelenideElement se) {
+        if (se.exists()) {
+            se.click();
         }
-
-        shortDelay(1);
         return this;
     }
 
+
+    public BasePage ifPresentCloseAdvice(AdviceItems adviceItem) {
+        sleep(1000);
+        if ($(accessibilityId(adviceItem.value)).exists()) {
+
+            getShot("Closing advice popup");
+            $(accessibilityId(adviceItem.value)).click();
+            sleep(1000);
+            getShot("Closed advice popup");
+        } else {
+            step(format("WRONG SEARCH FOR ELEMENT '%s'.", adviceItem.value));
+        }
+
+        sleep(500);
+        return this;
+    }
 
     public static void shortDelay(int second) {
         ((AndroidDriver) getWebDriver()).getOrientation();
